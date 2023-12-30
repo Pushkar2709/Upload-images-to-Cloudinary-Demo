@@ -5,21 +5,6 @@ const API_KEY = process.env.CLOUDINARY_API_KEY || "";
 const API_SECRET = process.env.CLOUDINARY_API_SECRET || "";
 const CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME || "";
 
-export async function GET() {
-    try {
-        cloudinary.config({
-            cloud_name: CLOUD_NAME, 
-            api_key: API_KEY, 
-            api_secret: API_SECRET
-        });
-        const data = await cloudinary.api.resources_by_tag("Demo");
-        return Response.json({success: true, data});
-    } catch(error) {
-        // console.log(error);
-        return Response.json({success: false});
-    }
-}
-
 export async function POST(req: NextRequest) {
     try {
         const folder = 'ImageUploadDemo';

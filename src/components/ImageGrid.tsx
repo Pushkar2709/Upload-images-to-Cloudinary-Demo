@@ -1,18 +1,26 @@
 import Image from "next/image";
 import DeleteImage from "./DeleteImage";
 import Link from "next/link";
+import { v2 as cloudinary } from "cloudinary";
 
 export default async function ImageGrid() {
 
-    const fetchUrlHost = process.env.URL || `https://${process.env.VERCEL_URL}`
+    const API_KEY = process.env.CLOUDINARY_API_KEY || "";
+    const API_SECRET = process.env.CLOUDINARY_API_SECRET || "";
+    const CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME || "";
 
-    const { success, data } = await fetch(`${fetchUrlHost}/api/image`, { cache: 'no-store' }).then(r => r.json());
+    cloudinary.config({
+        cloud_name: CLOUD_NAME,
+        api_key: API_KEY,
+        api_secret: API_SECRET
+    });
+    const data = await cloudinary.api.resources_by_tag("Demo");
     const images = data.resources;
 
     return (
         <div className="flex flex-wrap m-10">
             {
-                images.map((image: any) => 
+                images.map((image: any) =>
                     <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4" key={image.asset_id}>
                         <ImageCard url={image.secure_url} public_id={image.public_id} />
                     </div>
@@ -33,7 +41,7 @@ function ImageCard({ url, public_id }: { url: string, public_id: string }) {
             />
             <div className="flex justify-center flex-wrap gap-10 absolute top-1/2 -translate-y-1/2 invisible group-hover:visible w-full">
                 <Link className="p-2 rounded-lg bg-gray-600 hover:bg-gray-800" href={url} target="_blank">View</Link>
-                <DeleteImage public_id={public_id}/>
+                <DeleteImage public_id={public_id} />
             </div>
         </div>
     )
