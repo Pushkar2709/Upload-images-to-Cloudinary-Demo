@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default async function ImageGrid() {
 
-    const { success, data } = await fetch('http://localhost:3000/api/image', { cache: 'no-store' }).then(r => r.json());
+    const { success, data } = await fetch(`${process.env.URL}/api/image`, { cache: 'no-store' }).then(r => r.json());
     const images = data.resources;
 
     return (

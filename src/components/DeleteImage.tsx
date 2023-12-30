@@ -10,7 +10,7 @@ export default function DeleteImage({public_id}: {public_id: string}) {
         const formData = new FormData();
         formData.append('public_id', public_id);
 
-        const data = await fetch("http://localhost:3000/api/image", {
+        const data = await fetch(`${process.env.URL}/api/image`, {
             method: 'DELETE', 
             body: formData
         }).then(r => r.json())
