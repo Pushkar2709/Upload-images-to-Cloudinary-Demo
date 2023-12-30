@@ -25,7 +25,7 @@ export default function ImageForm() {
             formData.append('file', file);
         }
         
-        const data = await fetch(`${process.env.URL}/api/image`, {
+        const data = await fetch(`/api/image`, {
             method: 'POST',
             body: formData
         }).then(r => r.json());

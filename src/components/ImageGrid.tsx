@@ -4,7 +4,9 @@ import Link from "next/link";
 
 export default async function ImageGrid() {
 
-    const { success, data } = await fetch(`${process.env.URL}/api/image`, { cache: 'no-store' }).then(r => r.json());
+    const fetchUrlHost = process.env.URL || `https://${process.env.VERCEL_URL}`
+
+    const { success, data } = await fetch(`${fetchUrlHost}/api/image`, { cache: 'no-store' }).then(r => r.json());
     const images = data.resources;
 
     return (
