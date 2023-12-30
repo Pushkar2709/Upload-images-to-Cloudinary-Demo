@@ -1,19 +1,13 @@
-import DeleteImage from "@/components/DeleteImage";
 import ImageForm from "@/components/ImageForm";
+import ImageGrid from "@/components/ImageGrid";
 
 export default async function Page() {
 
-    const {success, data} = await fetch('http://localhost:3000/api/image', {cache: 'no-store'}).then(r => r.json());
-    const images = data.resources;
-
     return (
         <div>
-            <div>Image Gallery</div>
+            <div className="text-center text-7xl font-serif font-bold m-2">Image Gallery</div>
             <ImageForm/>
-            {
-                images.map((image: any) => <img src={image.url} />)
-            }
-            {/* <DeleteImage/> */}
+            <ImageGrid/>
         </div>
     )
 }
