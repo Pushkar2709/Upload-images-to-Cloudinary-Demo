@@ -3,6 +3,8 @@ import DeleteImage from "./DeleteImage";
 import Link from "next/link";
 import { v2 as cloudinary } from "cloudinary";
 
+export const dynamic = 'force-dynamic';
+
 export default async function ImageGrid() {
 
     const API_KEY = process.env.CLOUDINARY_API_KEY || "";
